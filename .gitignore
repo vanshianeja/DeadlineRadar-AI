@@ -221,3 +221,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# DeadlineRadar project-specific exclusions
+.env
+.venv/
+instance/
+uploads/
+*.db
+*.sqlite3
+__pycache__/
+.pytest_cache/
