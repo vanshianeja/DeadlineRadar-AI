@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460">
+  <rect width="1200" height="460" rx="28" fill="#F5F1E8"/>
+
+  <rect x="420" y="28" width="360" height="36" rx="18"
+        fill="#FFFDF7" stroke="#D8D3C9"/>
+  <circle cx="442" cy="46" r="5" fill="#408662"/>
+  <text x="610" y="51" text-anchor="middle"
+        font-family="Arial, sans-serif" font-size="14" fill="#20201E">
+    BUILT FOR STUDENTS. DESIGNED FOR REAL LIFE.
+  </text>
+
+  <rect x="754" y="135" width="110" height="25" fill="#E9ACEF"/>
+
+  <text x="600" y="155" text-anchor="middle"
+        font-family="Arial, sans-serif" font-size="76"
+        font-weight="bold" letter-spacing="-4" fill="#20201E">
+    deadlineradar<tspan fill="#A43DAD">.</tspan>
+  </text>
+
+  <text x="600" y="205" text-anchor="middle"
+        font-family="Arial, sans-serif" font-size="24"
+        font-weight="bold" fill="#20201E">
+    Your deadlines. Finally under control.
+  </text>
+
+  <text x="600" y="238" text-anchor="middle"
+        font-family="Arial, sans-serif" font-size="16" fill="#686660">
+    An AI-powered proactive academic assistant
+  </text>
+
+  <g stroke="#EF7954" stroke-width="4">
+    <path d="M100 120 L160 120 M130 90 L130 150 M109 99 L151 141 M109 141 L151 99"/>
+  </g>
+
+  <path d="M1070 105 Q1080 140 1115 150 Q1080 160 1070 195 Q1060 160 1025 150 Q1060 140 1070 105"
+        fill="#9372C0"/>
+
+  <g transform="translate(125 295) rotate(-5 120 60)">
+    <rect x="4" y="5" width="230" height="112" rx="17" fill="#D4CEC2"/>
+    <rect width="230" height="112" rx="17" fill="#E9ACEF" stroke="#20201E"/>
+    <text x="20" y="28" font-family="Arial" font-size="12" fill="#20201E">01 / SMART INBOX</text>
+    <text x="20" y="69" font-family="Arial" font-size="32" font-weight="bold" fill="#20201E">Predict.</text>
+    <text x="20" y="92" font-family="Arial" font-size="13" fill="#20201E">Turn chaos into clarity.</text>
+  </g>
+
+  <g transform="translate(365 290) rotate(-2 120 60)">
+    <rect x="4" y="5" width="230" height="112" rx="17" fill="#D4CEC2"/>
+    <rect width="230" height="112" rx="17" fill="#EF7954" stroke="#20201E"/>
+    <text x="20" y="28" font-family="Arial" font-size="12" fill="#20201E">02 / COLLISION RADAR</text>
+    <text x="20" y="69" font-family="Arial" font-size="32" font-weight="bold" fill="#20201E">Detect.</text>
+    <text x="20" y="92" font-family="Arial" font-size="13" fill="#20201E">Spot overload early.</text>
+  </g>
+
+  <g transform="translate(605 290) rotate(2 120 60)">
+    <rect x="4" y="5" width="230" height="112" rx="17" fill="#D4CEC2"/>
+    <rect width="230" height="112" rx="17" fill="#A8B7F5" stroke="#20201E"/>
+    <text x="20" y="28" font-family="Arial" font-size="12" fill="#20201E">03 / WHAT-IF</text>
+    <text x="20" y="69" font-family="Arial" font-size="32" font-weight="bold" fill="#20201E">Simulate.</text>
+    <text x="20" y="92" font-family="Arial" font-size="13" fill="#20201E">Explore possibilities.</text>
+  </g>
+
+  <g transform="translate(845 295) rotate(5 120 60)">
+    <rect x="4" y="5" width="230" height="112" rx="17" fill="#D4CEC2"/>
+    <rect width="230" height="112" rx="17" fill="#B9D9AE" stroke="#20201E"/>
+    <text x="20" y="28" font-family="Arial" font-size="12" fill="#20201E">04 / RECOVERY PLAN</text>
+    <text x="20" y="69" font-family="Arial" font-size="32" font-weight="bold" fill="#20201E">Recover.</text>
+    <text x="20" y="92" font-family="Arial" font-size="13" fill="#20201E">Take back your time.</text>
+  </g>
+</svg>
