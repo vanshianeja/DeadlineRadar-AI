@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="DeadlineRadar AI turns campus chaos into an organized, achievable academic plan.">
+
+    <title>DeadlineRadar AI — Less Chaos. More Clarity.</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+
+    <script src="{{ url_for('static', filename='js/landing.js') }}" defer></script>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <header class="navbar">
+
+        <a href="/" class="brand">
+            <span class="brand-icon">
+                <i data-lucide="radar"></i>
+            </span>
+            deadlineradar<span class="brand-dot">.</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="#how-it-works">How it works</a>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+        </nav>
+
+        <a href="/workspace" class="nav-cta">
+            Launch Workspace
+            <i data-lucide="arrow-up-right"></i>
+        </a>
+
+    </header>
+
+
+    <main>
+
+        <!-- HERO SECTION -->
+
+        <section class="hero">
+
+            <div class="hero-badge">
+                <span class="status-dot"></span>
+                Built for students. Designed for real life.
+            </div>
+
+            <div class="hero-decoration decoration-one">✳</div>
+            <div class="hero-decoration decoration-two">✦</div>
+
+            <h1>
+                Your deadlines.<br>
+                Finally under <span class="highlight">control.</span>
+            </h1>
+
+            <span class="handwritten hero-note">
+                College is chaotic enough!
+            </span>
+
+            <p class="hero-description">
+                From messy campus messages to an achievable academic plan.
+                Predict conflicts, simulate possibilities and take back your time.
+            </p>
+
+            <div class="hero-actions">
+
+                <a href="/workspace" class="button button-primary">
+                    Organize my chaos
+                    <i data-lucide="arrow-up-right"></i>
+                </a>
+
+                <a href="#how-it-works" class="button button-secondary">
+                    See how it works
+                    <i data-lucide="arrow-down"></i>
+                </a>
+
+            </div>
+
+
+            <!-- OVERLAPPING FEATURE CARDS -->
+
+            <div class="hero-cards">
+
+                <article class="hero-card card-predict">
+
+                    <div class="card-top">
+                        <span>01 / SMART INBOX</span>
+                        <i data-lucide="sparkles"></i>
+                    </div>
+
+                    <div class="card-illustration">
+                        <i data-lucide="scan-text"></i>
+                    </div>
+
+                    <h2>Predict.</h2>
+
+                    <p>Turn messy messages into meaningful deadlines.</p>
+
+                    <span class="card-sticker">AI powered ✦</span>
+
+                </article>
+
+
+                <article class="hero-card card-detect">
+
+                    <div class="card-top">
+                        <span>02 / COLLISION RADAR</span>
+                        <i data-lucide="radar"></i>
+                    </div>
+
+                    <div class="card-illustration">
+                        <i data-lucide="alarm-clock"></i>
+                    </div>
+
+                    <h2>Detect.</h2>
+
+                    <p>Spot academic overload before it becomes a crisis.</p>
+
+                    <span class="card-sticker">No surprises!</span>
+
+                </article>
+
+
+                <article class="hero-card card-simulate">
+
+                    <div class="card-top">
+                        <span>03 / WHAT-IF</span>
+                        <i data-lucide="sliders-horizontal"></i>
+                    </div>
+
+                    <div class="card-illustration">
+                        <i data-lucide="git-branch"></i>
+                    </div>
+
+                    <h2>Simulate.</h2>
+
+                    <p>Explore possibilities without changing your real plan.</p>
+
+                    <span class="card-sticker">What if...?</span>
+
+                </article>
+
+
+                <article class="hero-card card-recover">
+
+                    <div class="card-top">
+                        <span>04 / RECOVERY PLAN</span>
+                        <i data-lucide="calendar-check"></i>
+                    </div>
+
+                    <div class="card-illustration">
+                        <i data-lucide="list-checks"></i>
+                    </div>
+
+                    <h2>Recover.</h2>
+
+                    <p>Build an achievable plan, one study session at a time.</p>
+
+                    <span class="card-sticker">You've got a plan.</span>
+
+                </article>
+
+            </div>
+
+            <p class="handwritten cards-caption">
+                Four steps. A little less academic chaos.
+            </p>
+
+        </section>
+
+
+        <!-- MOVING TEXT STRIP -->
+
+        <section class="ticker" aria-label="Product capabilities">
+
+            <div class="ticker-track">
+
+                <span>Less chaos</span><b>✳</b>
+                <span>More clarity</span><b>✳</b>
+                <span>Smarter deadlines</span><b>✳</b>
+                <span>Better decisions</span><b>✳</b>
+
+                <span>Less chaos</span><b>✳</b>
+                <span>More clarity</span><b>✳</b>
+                <span>Smarter deadlines</span><b>✳</b>
+                <span>Better decisions</span><b>✳</b>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROBLEM SECTION -->
+
+        <section class="problem-section reveal" id="about">
+
+            <span class="section-label">THE STUDENT STRUGGLE</span>
+
+            <h2>
+                College life is messy.<br>
+                Your plan <span class="highlight">doesn't have to be.</span>
+            </h2>
+
+            <div class="problem-grid">
+
+                <article class="problem-card">
+
+                    <i data-lucide="messages-square"></i>
+
+                    <h3>Scattered information</h3>
+
+                    <p>
+                        WhatsApp messages, classroom announcements,
+                        emails and notice boards. Deadlines are everywhere.
+                    </p>
+
+                </article>
+
+                <article class="problem-card">
+
+                    <i data-lucide="calendar-x"></i>
+
+                    <h3>Unexpected collisions</h3>
+
+                    <p>
+                        Multiple submissions, vivas and exams collide
+                        before you realize there isn't enough time.
+                    </p>
+
+                </article>
+
+                <article class="problem-card">
+
+                    <i data-lucide="brain"></i>
+
+                    <h3>Decision overload</h3>
+
+                    <p>
+                        What should you finish first?
+                        Can everything fit into your available study hours?
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- INTERACTIVE DEMONSTRATION -->
+
+        <section class="demo-section reveal" id="how-it-works">
+
+            <div class="section-heading">
+
+                <span class="section-label">A LITTLE AI MAGIC</span>
+
+                <h2>From chaos to clarity.</h2>
+
+                <p>
+                    See how DeadlineRadar transforms everyday campus
+                    conversations into actionable academic information.
+                </p>
+
+            </div>
+
+            <div class="demo-container">
+
+                <div class="demo-panel message-panel">
+
+                    <div class="panel-header">
+
+                        <i data-lucide="message-circle"></i>
+
+                        <span>Campus group chat</span>
+
+                        <span class="demo-tag">Example</span>
+
+                    </div>
+
+                    <div class="chat-message">
+                        <strong>Class Representative</strong>
+
+                        <p>
+                            Guys DBMS assignment 30 Nov tak submit karni hai.
+                        </p>
+
+                        <small>10:42 AM</small>
+                    </div>
+
+                    <div class="chat-message">
+                        <strong>Class Representative</strong>
+
+                        <p>
+                            DSA viva 28 Nov ko hai, prepare kar lena.
+                        </p>
+
+                        <small>10:45 AM</small>
+                    </div>
+
+                    <div class="chat-message">
+                        <strong>Class Representative</strong>
+
+                        <p>
+                            MPCA quiz shayad next week hai, not confirmed.
+                        </p>
+
+                        <small>10:48 AM</small>
+                    </div>
+
+                </div>
+
+
+                <div class="demo-connector">
+
+                    <div class="ai-orb">
+                        <i data-lucide="sparkles"></i>
+                    </div>
+
+                    <span>AI extraction</span>
+
+                    <i data-lucide="arrow-right"></i>
+
+                </div>
+
+
+                <div class="demo-panel result-panel">
+
+                    <div class="panel-header">
+
+                        <i data-lucide="list-checks"></i>
+
+                        <span>Structured deadlines</span>
+
+                    </div>
+
+                    <div class="demo-task">
+
+                        <span class="task-indicator purple"></span>
+
+                        <div>
+                            <strong>DBMS Assignment</strong>
+                            <p>30 November · Estimated 4h</p>
+                        </div>
+
+                        <i data-lucide="check-circle"></i>
+
+                    </div>
+
+                    <div class="demo-task">
+
+                        <span class="task-indicator orange"></span>
+
+                        <div>
+                            <strong>DSA Viva</strong>
+                            <p>28 November · Estimated 2h</p>
+                        </div>
+
+                        <i data-lucide="check-circle"></i>
+
+                    </div>
+
+                    <div class="demo-task uncertain">
+
+                        <span class="task-indicator yellow"></span>
+
+                        <div>
+                            <strong>MPCA Quiz</strong>
+                            <p>Deadline needs confirmation</p>
+                        </div>
+
+                        <i data-lucide="circle-alert"></i>
+
+                    </div>
+
+                    <div class="demo-success">
+                        <i data-lucide="sparkles"></i>
+                        3 tasks identified. 1 needs confirmation.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <p class="demo-disclaimer">
+                Illustrative preview using sample campus messages.
+            </p>
+
+            <a href="/workspace" class="button button-primary">
+                Try with your own messages
+                <i data-lucide="arrow-up-right"></i>
+            </a>
+
+        </section>
+
+
+        <!-- FEATURES SECTION -->
+
+        <section class="features-section reveal" id="features">
+
+            <div class="section-heading">
+
+                <span class="section-label">YOUR ACADEMIC TOOLKIT</span>
+
+                <h2>
+                    Meet your new<br>
+                    <span class="highlight">academic superpowers.</span>
+                </h2>
+
+                <p>
+                    More than a deadline tracker.
+                    A workspace that helps you think ahead.
+                </p>
+
+            </div>
+
+
+            <div class="feature-grid">
+
+                <article class="feature-tile tile-pink">
+
+                    <span class="feature-number">01</span>
+
+                    <i data-lucide="inbox"></i>
+
+                    <h3>Smart Inbox</h3>
+
+                    <p>
+                        Understand English, Hindi and Hinglish messages.
+                        Extract deadlines from text and screenshots.
+                    </p>
+
+                    <a href="/workspace#inbox">
+                        Explore <i data-lucide="arrow-up-right"></i>
+                    </a>
+
+                </article>
+
+
+                <article class="feature-tile tile-yellow">
+
+                    <span class="feature-number">02</span>
+
+                    <i data-lucide="calendar-days"></i>
+
+                    <h3>Deadline Hub</h3>
+
+                    <p>
+                        Organize tasks, confirm uncertain dates and identify
+                        duplicate or rescheduled deadlines.
+                    </p>
+
+                    <a href="/workspace#deadlines">
+                        Explore <i data-lucide="arrow-up-right"></i>
+                    </a>
+
+                </article>
+
+
+                <article class="feature-tile tile-orange">
+
+                    <span class="feature-number">03</span>
+
+                    <i data-lucide="radar"></i>
+
+                    <h3>Collision Radar</h3>
+
+                    <p>
+                        Compare estimated workload with available study hours
+                        and discover conflicts before deadlines arrive.
+                    </p>
+
+                    <a href="/workspace#collisions">
+                        Explore <i data-lucide="arrow-up-right"></i>
+                    </a>
+
+                </article>
+
+
+                <article class="feature-tile tile-green">
+
+                    <span class="feature-number">04</span>
+
+                    <i data-lucide="list-checks"></i>
+
+                    <h3>Recovery Planner</h3>
+
+                    <p>
+                        Get an achievable day-wise study schedule using
+                        deadline-aware task allocation.
+                    </p>
+
+                    <a href="/workspace#recovery">
+                        Explore <i data-lucide="arrow-up-right"></i>
+                    </a>
+
+                </article>
+
+
+                <article class="feature-tile tile-blue">
+
+                    <span class="feature-number">05</span>
+
+                    <i data-lucide="git-compare-arrows"></i>
+
+                    <h3>What-If Simulator</h3>
+
+                    <p>
+                        Test changes in availability, deadlines and progress
+                        without modifying your actual tasks.
+                    </p>
+
+                    <a href="/workspace#simulator">
+                        Explore <i data-lucide="arrow-up-right"></i>
+                    </a>
+
+                </article>
+
+
+                <article class="feature-tile tile-lavender">
+
+                    <span class="feature-number">06</span>
+
+                    <i data-lucide="mail"></i>
+
+                    <h3>Extension Assistant</h3>
+
+                    <p>
+                        Calculate the minimum feasible extension for a task
+                        and generate a respectful email draft.
+                    </p>
+
+                    <a href="/workspace#extension">
+                        Explore <i data-lucide="arrow-up-right"></i>
+                    </a>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- FINAL CTA -->
+
+        <section class="final-cta reveal">
+
+            <span class="cta-decoration">✳</span>
+
+            <span class="handwritten">Your future self will thank you.</span>
+
+            <h2>
+                Less panic.<br>
+                More planning.
+            </h2>
+
+            <p>
+                Stop guessing what to do next.
+                Start making informed academic decisions.
+            </p>
+
+            <a href="/workspace" class="button button-primary">
+
+                Launch your workspace
+
+                <i data-lucide="arrow-up-right"></i>
+
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div class="footer-top">
+
+            <div>
+                <strong>Less chaos. More clarity.</strong>
+                <p>Built for the Bennett University student community.</p>
+            </div>
+
+            <div class="footer-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How it works</a>
+                <a href="/workspace">Workspace ↗</a>
+            </div>
+
+        </div>
+
+        <div class="footer-wordmark">
+            deadlineradar<span>.</span>
+        </div>
+
+        <div class="footer-bottom">
+
+            <span>© 2026 DeadlineRadar AI</span>
+
+            <span>Made for students, by a student. ♡</span>
+
+        </div>
+
+    </footer>
+
+</body>
+</html>

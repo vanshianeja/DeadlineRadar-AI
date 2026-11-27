@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DeadlineRadar AI — Workspace</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/workspace.css') }}">
+
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</head>
+
+<body>
+
+    <div class="app-layout">
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar" id="sidebar">
+
+            <a href="/" class="brand">
+                <span class="brand-icon">
+                    <i data-lucide="radar"></i>
+                </span>
+
+                deadlineradar<span class="brand-dot">.</span>
+            </a>
+
+            <div class="workspace-label">
+                <span class="online-dot"></span>
+                Student workspace
+            </div>
+
+            <div class="nav-label">WORKSPACE</div>
+
+            <nav class="sidebar-nav">
+
+                <button class="nav-item active" data-page="overview">
+                    <i data-lucide="layout-dashboard"></i>
+                    Overview
+                </button>
+
+                <button class="nav-item" data-page="inbox">
+                    <i data-lucide="inbox"></i>
+                    Smart Inbox
+                    <span class="nav-ai">AI</span>
+                </button>
+
+                <button class="nav-item" data-page="deadlines">
+                    <i data-lucide="calendar-days"></i>
+                    Deadline Hub
+                </button>
+
+                <div class="nav-label">PLAN & OPTIMIZE</div>
+
+                <button class="nav-item" data-page="collisions">
+                    <i data-lucide="radar"></i>
+                    Collision Radar
+                </button>
+
+                <button class="nav-item" data-page="recovery">
+                    <i data-lucide="list-checks"></i>
+                    Recovery Plan
+                </button>
+
+                <button class="nav-item" data-page="simulator">
+                    <i data-lucide="git-compare-arrows"></i>
+                    What-If Simulator
+                </button>
+
+                <button class="nav-item" data-page="extension">
+                    <i data-lucide="mail"></i>
+                    Extension Assistant
+                </button>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <div class="sidebar-note">
+                    <span class="handwritten">One thing at a time.</span>
+                    <i data-lucide="sparkles"></i>
+                    <p>Small steps make big deadlines manageable.</p>
+                </div>
+
+                <a href="/" class="back-home">
+                    <i data-lucide="arrow-left"></i>
+                    Back to homepage
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN WORKSPACE -->
+
+        <main class="main-content">
+
+            <header class="topbar">
+
+                <div class="topbar-left">
+
+                    <button id="menu-toggle" class="icon-button"
+                            aria-label="Toggle navigation">
+                        <i data-lucide="menu"></i>
+                    </button>
+
+                    <span id="current-page-label">Overview</span>
+
+                </div>
+
+                <div class="topbar-right">
+
+                    <span class="date-label" id="today-date"></span>
+
+                    <span class="system-status" id="system-status">
+                        <span class="online-dot"></span>
+                        Connecting...
+                    </span>
+
+                </div>
+
+            </header>
+
+
+            <!-- GLOBAL PLANNING SETTINGS -->
+
+            <div class="planning-settings">
+
+                <div class="settings-title">
+                    <i data-lucide="sliders-horizontal"></i>
+                    <strong>Your planning settings</strong>
+                </div>
+
+                <div class="setting-field">
+
+                    <label for="daily-hours">Daily study hours</label>
+
+                    <input type="number"
+                           id="daily-hours"
+                           min="0"
+                           max="24"
+                           step="0.5"
+                           value="3"
+                           title="Available study hours per day">
+
+                </div>
+
+                <div class="setting-field">
+
+                    <label for="start-date">Planning from</label>
+
+                    <input type="date" id="start-date">
+
+                </div>
+
+                <button class="button button-dark" id="apply-settings">
+                    <i data-lucide="refresh-cw"></i>
+                    Update plan
+                </button>
+
+            </div>
+
+
+            <!-- =========================
+                 OVERVIEW
+            ========================== -->
+
+            <section class="page active" id="page-overview">
+
+                <div class="welcome-banner">
+
+                    <div>
+
+                        <span class="eyebrow">YOUR ACADEMIC COMMAND CENTER</span>
+
+                        <h1>Hey, student! <span>✳</span></h1>
+
+                        <p>
+                            College is chaotic enough.
+                            Let's make your deadlines manageable.
+                        </p>
+
+                        <button class="button button-dark" data-go="inbox">
+                            Add new deadlines
+                            <i data-lucide="arrow-up-right"></i>
+                        </button>
+
+                    </div>
+
+                    <div class="welcome-art">
+                        <i data-lucide="calendar-check"></i>
+                        <span class="handwritten">You've got this!</span>
+                    </div>
+
+                </div>
+
+
+                <div class="section-title">
+                    <h2>Your workload at a glance.</h2>
+                    <span class="handwritten">The bigger picture ↘</span>
+                </div>
+
+
+                <div class="stats-grid">
+
+                    <article class="stat-card bg-pink">
+
+                        <i data-lucide="layers"></i>
+
+                        <span class="stat-label">Active deadlines</span>
+
+                        <strong id="stat-active">—</strong>
+
+                        <small>Pending and in progress</small>
+
+                    </article>
+
+                    <article class="stat-card bg-orange">
+
+                        <i data-lucide="radar"></i>
+
+                        <span class="stat-label">Workload collisions</span>
+
+                        <strong id="stat-collisions">—</strong>
+
+                        <small>Overloaded deadline checkpoints</small>
+
+                    </article>
+
+                    <article class="stat-card bg-blue">
+
+                        <i data-lucide="clock"></i>
+
+                        <span class="stat-label">Remaining workload</span>
+
+                        <strong id="stat-hours">—</strong>
+
+                        <small>Confirmed upcoming study hours</small>
+
+                    </article>
+
+                    <article class="stat-card bg-green">
+
+                        <i data-lucide="circle-check"></i>
+
+                        <span class="stat-label">Completed tasks</span>
+
+                        <strong id="stat-completed">—</strong>
+
+                        <small>Progress worth celebrating</small>
+
+                    </article>
+
+                </div>
+
+
+                <div class="overview-grid">
+
+                    <article class="panel">
+
+                        <div class="panel-heading">
+
+                            <h2>Upcoming deadlines</h2>
+
+                            <button class="text-button" data-go="deadlines">
+                                View all ↗
+                            </button>
+
+                        </div>
+
+                        <div id="overview-deadlines" class="result-area">
+                            Loading deadlines...
+                        </div>
+
+                    </article>
+
+
+                    <article class="panel">
+
+                        <div class="panel-heading">
+
+                            <h2>Workload outlook</h2>
+
+                            <button class="text-button" data-go="collisions">
+                                Explore ↗
+                            </button>
+
+                        </div>
+
+                        <div id="overview-risk" class="result-area">
+                            Analyzing your workload...
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 SMART INBOX
+            ========================== -->
+
+            <section class="page" id="page-inbox">
+
+                <div class="page-heading">
+
+                    <span class="eyebrow">01 / AI-POWERED EXTRACTION</span>
+
+                    <h1>Smart Inbox<span>.</span></h1>
+
+                    <p>
+                        Messy messages in. Organized deadlines out.
+                    </p>
+
+                </div>
+
+
+                <div class="info-banner bg-lavender">
+
+                    <i data-lucide="sparkles"></i>
+
+                    <div>
+                        <strong>A little AI magic.</strong>
+
+                        <p>
+                            Understands English, Hindi and Hinglish.
+                            Extracts academic tasks and flags uncertain information.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="two-column">
+
+                    <article class="panel">
+
+                        <div class="panel-heading">
+
+                            <h2>Paste a message</h2>
+
+                            <i data-lucide="messages-square"></i>
+
+                        </div>
+
+                        <textarea id="message-input"
+                                  rows="10"
+                                  placeholder="Guys DBMS assignment Monday tak submit karni hai..."></textarea>
+
+                        <div class="button-row">
+
+                            <button class="button button-outline"
+                                    id="load-sample">
+                                Use sample
+                            </button>
+
+                            <button class="button button-dark"
+                                    id="extract-text">
+                                <i data-lucide="sparkles"></i>
+                                Extract deadlines
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="panel">
+
+                        <div class="panel-heading">
+
+                            <h2>Upload a screenshot</h2>
+
+                            <i data-lucide="image"></i>
+
+                        </div>
+
+                        <label class="upload-zone" for="image-input">
+
+                            <i data-lucide="cloud-upload"></i>
+
+                            <strong>Choose a screenshot</strong>
+
+                            <p>Notice boards, group chats or announcements</p>
+
+                            <small>PNG, JPG, WEBP · Maximum 5 MB</small>
+
+                        </label>
+
+                        <input type="file"
+                               id="image-input"
+                               accept="image/png,image/jpeg,image/webp"
+                               hidden>
+
+                        <img id="image-preview"
+                             class="image-preview"
+                             alt="Selected screenshot preview"
+                             hidden>
+
+                        <p id="file-name" class="muted"></p>
+
+                        <button class="button button-dark full-width"
+                                id="extract-image">
+
+                            <i data-lucide="scan-text"></i>
+                            Analyze screenshot
+
+                        </button>
+
+                    </article>
+
+                </div>
+
+
+                <article class="panel">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <h2>Extracted deadlines</h2>
+                            <p>Review AI suggestions before saving.</p>
+                        </div>
+
+                        <button class="button button-dark"
+                                id="save-extracted"
+                                disabled>
+
+                            <i data-lucide="save"></i>
+                            Save selected tasks
+
+                        </button>
+
+                    </div>
+
+                    <div id="extraction-results" class="empty-state">
+
+                        <i data-lucide="inbox"></i>
+
+                        <h3>Your inbox is ready.</h3>
+
+                        <p>
+                            Paste a message or upload a screenshot to begin.
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <!-- =========================
+                 DEADLINE HUB
+            ========================== -->
+
+            <section class="page" id="page-deadlines">
+
+                <div class="page-heading">
+
+                    <span class="eyebrow">02 / YOUR ACADEMIC ORGANIZER</span>
+
+                    <h1>Deadline Hub<span>.</span></h1>
+
+                    <p>
+                        Every assignment, exam and viva.
+                        Finally in one place.
+                    </p>
+
+                </div>
+
+                <article class="panel">
+
+                    <div class="panel-heading">
+
+                        <h2>All your deadlines</h2>
+
+                        <button class="button button-dark"
+                                data-go="inbox">
+
+                            <i data-lucide="plus"></i>
+                            Add deadlines
+
+                        </button>
+
+                    </div>
+
+                    <div class="filter-row">
+
+                        <input type="search"
+                               id="task-search"
+                               placeholder="Search tasks or subjects...">
+
+                        <select id="task-filter">
+
+                            <option value="all">All tasks</option>
+                            <option value="pending">Pending</option>
+                            <option value="in_progress">In progress</option>
+                            <option value="completed">Completed</option>
+                            <option value="confirmation">Needs confirmation</option>
+
+                        </select>
+
+                    </div>
+
+                    <div id="task-list" class="task-grid">
+                        Loading tasks...
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <!-- =========================
+                 COLLISION RADAR
+            ========================== -->
+
+            <section class="page" id="page-collisions">
+
+                <div class="page-heading">
+
+                    <span class="eyebrow">03 / PROACTIVE RISK DETECTION</span>
+
+                    <h1>Collision Radar<span>.</span></h1>
+
+                    <p>
+                        Find academic overload before it finds you.
+                    </p>
+
+                </div>
+
+                <div class="info-banner bg-peach">
+
+                    <i data-lucide="radar"></i>
+
+                    <div>
+
+                        <strong>Not just another deadline reminder.</strong>
+
+                        <p>
+                            We compare cumulative workload against your
+                            available study capacity at each deadline.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <article class="panel">
+
+                    <div class="panel-heading">
+
+                        <h2>Workload analysis</h2>
+
+                        <button class="button button-dark"
+                                id="analyze-collisions">
+
+                            <i data-lucide="radar"></i>
+                            Run analysis
+
+                        </button>
+
+                    </div>
+
+                    <div id="collision-summary" class="result-area"></div>
+
+                    <div id="collision-chart" class="chart-area"></div>
+
+                    <div id="collision-results" class="result-area"></div>
+
+                </article>
+
+            </section>
+
+
+            <!-- =========================
+                 RECOVERY PLAN
+            ========================== -->
+
+            <section class="page" id="page-recovery">
+
+                <div class="page-heading">
+
+                    <span class="eyebrow">04 / SMART SCHEDULING</span>
+
+                    <h1>Recovery Plan<span>.</span></h1>
+
+                    <p>
+                        A realistic plan for the time you actually have.
+                    </p>
+
+                </div>
+
+                <div class="info-banner bg-green">
+
+                    <i data-lucide="calendar-check"></i>
+
+                    <div>
+
+                        <strong>One study session at a time.</strong>
+
+                        <p>
+                            Tasks are allocated using an earliest-deadline-first
+                            algorithm with priority-based tie breaking.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <article class="panel">
+
+                    <div class="panel-heading">
+
+                        <h2>Your study schedule</h2>
+
+                        <button class="button button-dark"
+                                id="generate-schedule">
+
+                            <i data-lucide="calendar-check"></i>
+                            Generate plan
+
+                        </button>
+
+                    </div>
+
+                    <div id="schedule-summary" class="result-area"></div>
+
+                    <div id="schedule-results" class="timeline"></div>
+
+                    <div id="schedule-risk" class="result-area"></div>
+
+                </article>
+
+            </section>
+
+
+            <!-- =========================
+                 WHAT-IF SIMULATOR
+            ========================== -->
+
+            <section class="page" id="page-simulator">
+
+                <div class="page-heading">
+
+                    <span class="eyebrow">05 / SCENARIO MODELLING</span>
+
+                    <h1>What-If Simulator<span>.</span></h1>
+
+                    <p>
+                        Explore possibilities before making decisions.
+                    </p>
+
+                </div>
+
+                <div class="info-banner bg-blue">
+
+                    <i data-lucide="git-compare-arrows"></i>
+
+                    <div>
+
+                        <strong>Experiment without consequences.</strong>
+
+                        <p>
+                            Simulated changes never modify your actual deadlines
+                            or saved task progress.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="two-column">
+
+                    <article class="panel">
+
+                        <div class="panel-heading">
+                            <h2>Build your scenario</h2>
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="sim-hours">
+                                Simulated study hours per day
+                            </label>
+
+                            <input type="number"
+                                   id="sim-hours"
+                                   min="0"
+                                   max="24"
+                                   step="0.5"
+                                   value="2">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="sim-task">
+                                Modify a task (optional)
+                            </label>
+
+                            <select id="sim-task">
+
+                                <option value="">No task changes</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="sim-date">Hypothetical deadline</label>
+
+                            <input type="date" id="sim-date">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="sim-effort">
+                                Hypothetical estimated hours
+                            </label>
+
+                            <input type="number"
+                                   id="sim-effort"
+                                   min="0.5"
+                                   max="100"
+                                   step="0.5"
+                                   placeholder="Leave unchanged">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="sim-progress">
+                                Hypothetical completed hours
+                            </label>
+
+                            <input type="number"
+                                   id="sim-progress"
+                                   min="0"
+                                   max="100"
+                                   step="0.5"
+                                   placeholder="Leave unchanged">
+
+                        </div>
+
+                        <button class="button button-dark full-width"
+                                id="run-simulation">
+
+                            <i data-lucide="play"></i>
+                            Run simulation
+
+                        </button>
+
+                    </article>
+
+
+                    <article class="panel">
+
+                        <div class="panel-heading">
+                            <h2>Before vs. after</h2>
+                        </div>
+
+                        <div id="simulation-results" class="empty-state">
+
+                            <i data-lucide="git-compare-arrows"></i>
+
+                            <h3>What if things were different?</h3>
+
+                            <p>
+                                Run a scenario to compare workload,
+                                collisions and feasibility.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 EXTENSION ASSISTANT
+            ========================== -->
+
+            <section class="page" id="page-extension">
+
+                <div class="page-heading">
+
+                    <span class="eyebrow">06 / INTELLIGENT NEGOTIATION</span>
+
+                    <h1>Extension Assistant<span>.</span></h1>
+
+                    <p>
+                        Ask for the time you need, not the time you guess.
+                    </p>
+
+                </div>
+
+                <div class="info-banner bg-pink">
+
+                    <i data-lucide="mail"></i>
+
+                    <div>
+
+                        <strong>Evidence-backed extension requests.</strong>
+
+                        <p>
+                            Calculate the minimum feasible extension,
+                            then create a respectful AI-generated email draft.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="two-column">
+
+                    <article class="panel">
+
+                        <div class="panel-heading">
+                            <h2>Find a feasible extension</h2>
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="extension-task">Select a task</label>
+
+                            <select id="extension-task">
+
+                                <option value="">Choose a deadline</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="extension-limit">
+                                Maximum extension days to consider
+                            </label>
+
+                            <input type="number"
+                                   id="extension-limit"
+                                   min="1"
+                                   max="30"
+                                   value="7">
+
+                        </div>
+
+                        <label class="checkbox-row">
+
+                            <input type="checkbox"
+                                   id="generate-email"
+                                   checked>
+
+                            Generate an AI email draft
+
+                        </label>
+
+                        <button class="button button-dark full-width"
+                                id="recommend-extension">
+
+                            <i data-lucide="sparkles"></i>
+                            Find minimum extension
+
+                        </button>
+
+                        <div id="extension-results" class="result-area"></div>
+
+                    </article>
+
+
+                    <article class="panel email-panel">
+
+                        <div class="panel-heading">
+
+                            <h2>Your email draft</h2>
+
+                            <button class="button button-outline"
+                                    id="copy-email"
+                                    disabled>
+
+                                <i data-lucide="copy"></i>
+                                Copy
+
+                            </button>
+
+                        </div>
+
+                        <textarea id="email-draft"
+                                  rows="16"
+                                  placeholder="Your AI-generated extension request will appear here..."></textarea>
+
+                        <p class="muted">
+                            Review all information before sending.
+                            DeadlineRadar never sends emails automatically.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- WORKSPACE FOOTER -->
+
+            <footer class="workspace-footer">
+
+                <span>DeadlineRadar AI © 2026</span>
+
+                <span>Less chaos. More clarity. ♡</span>
+
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <!-- TASK EDITING DIALOG -->
+
+    <dialog id="task-dialog">
+
+        <form id="task-edit-form">
+
+            <div class="panel-heading">
+
+                <h2>Edit deadline</h2>
+
+                <button type="button"
+                        class="icon-button"
+                        id="close-dialog"
+                        aria-label="Close task editor">
+
+                    <i data-lucide="x"></i>
+
+                </button>
+
+            </div>
+
+            <input type="hidden" id="edit-id">
+
+            <div class="form-group">
+
+                <label for="edit-subject">Subject</label>
+
+                <input type="text" id="edit-subject" required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="edit-task">Task name</label>
+
+                <input type="text" id="edit-task" required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="edit-description">Description</label>
+
+                <textarea id="edit-description" rows="3"></textarea>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="edit-date">Deadline</label>
+
+                <input type="date" id="edit-date">
+
+            </div>
+
+            <div class="two-column">
+
+                <div class="form-group">
+
+                    <label for="edit-hours">Estimated hours</label>
+
+                    <input type="number"
+                           id="edit-hours"
+                           min="0.5"
+                           max="100"
+                           step="0.5">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="edit-progress">Completed hours</label>
+
+                    <input type="number"
+                           id="edit-progress"
+                           min="0"
+                           max="100"
+                           step="0.5">
+
+                </div>
+
+            </div>
+
+            <div class="two-column">
+
+                <div class="form-group">
+
+                    <label for="edit-priority">Priority</label>
+
+                    <select id="edit-priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="edit-status">Status</label>
+
+                    <select id="edit-status">
+                        <option value="pending">Pending</option>
+                        <option value="in_progress">In progress</option>
+                        <option value="completed">Completed</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <label class="checkbox-row">
+
+                <input type="checkbox" id="edit-confirmed">
+
+                I have verified the deadline and estimated effort.
+
+            </label>
+
+            <button type="submit" class="button button-dark full-width">
+
+                <i data-lucide="save"></i>
+                Save changes
+
+            </button>
+
+        </form>
+
+    </dialog>
+
+
+    <!-- TOAST NOTIFICATIONS -->
+
+    <div id="toast-container" aria-live="polite"></div>
+
+</body>
+</html>
