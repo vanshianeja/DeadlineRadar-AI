@@ -16,6 +16,7 @@
 
 An AI-powered proactive academic assistant that transforms messy campus announcements into achievable academic plans.
 
+[🚀 Live Demo](https://deadlineradar-ai.onrender.com) ·
 [Explore Features](#-meet-your-new-academic-assistant) ·
 [See It in Action](#-a-little-less-chaos) ·
 [Under the Hood](#-under-the-hood) ·
@@ -36,6 +37,18 @@ Built for the AI Builderthon 2026 at Bennett University.
 <div align="center">
 <img src="assets/screenshots/landing.png" width="100%" alt="DeadlineRadar AI landing page"/>
 </div>
+
+## 🌐 Live Application
+
+**[Launch DeadlineRadar AI](https://deadlineradar-ai.onrender.com)**
+
+No installation or registration required. Open the application
+and start organizing your academic deadlines in your own
+isolated guest workspace.
+
+> **Note:** The application is hosted on Render's free tier.
+> The first request after inactivity may take 50–60 seconds
+> or longer while the server wakes up.
 
 ---
 
@@ -739,7 +752,7 @@ without appropriate permission.
 
 ## 🌱 What's next?
 
-### Built and tested locally
+### Implemented and tested
 
 - [x] Multilingual text extraction
 - [x] Screenshot-based deadline extraction
@@ -751,11 +764,11 @@ without appropriate permission.
 - [x] Minimum extension recommendation
 - [x] AI-assisted email drafting
 - [x] Automated algorithmic tests
+- [x] Isolated guest workspaces
+- [x] Public cloud deployment
 
 ### Future roadmap
 
-- [ ] Isolated guest workspaces
-- [ ] Public cloud deployment
 - [ ] Persistent user accounts
 - [ ] Personalized effort estimation
 - [ ] Variable daily study availability
@@ -770,8 +783,9 @@ without appropriate permission.
 
 <br/>
 
-- The current application is a single-user prototype.
-- Authentication and isolated user accounts are not implemented.
+- Guest workspaces are isolated through browser sessions.
+- Account-based authentication and cross-device synchronization are not implemented.
+- SQLite data may be lost during cloud restarts or redeployments.
 - Daily study capacity is modeled uniformly.
 - Scheduling primarily operates at calendar-date granularity.
 - Effort estimates depend on AI suggestions and student input.
@@ -832,3 +846,19 @@ Developed for the AI Builderthon 2026.
 <img src="assets/banner.svg" width="65%" alt="DeadlineRadar AI"/>
 
 </div>
+
+## 🚀 Deployment & Current Limitations
+
+- Publicly deployed on Render using Gunicorn.
+- Browser-based guest workspace isolation.
+- API rate limiting and secure production session cookies.
+- Gemini API credentials managed through environment variables.
+- 24 passing automated algorithmic tests.
+
+The current version is a functional hackathon prototype.
+Guest workspaces are browser-specific, and SQLite data may
+be lost during cloud server restarts or redeployments.
+
+Future improvements include account-based authentication,
+persistent PostgreSQL storage, cross-device synchronization,
+and adaptive study-hour estimation.
