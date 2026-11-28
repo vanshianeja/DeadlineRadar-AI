@@ -15,12 +15,37 @@ from engines.simulator import simulate_scenario
 from engines.extension_negotiator import recommend_extension
 from engines.email_generator import generate_extension_email
 from flask import Flask, jsonify, request, render_template
+import os
+from uuid import uuid4
+from flask import session
+from dotenv import load_dotenv
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+
+load_dotenv()
 
 app = Flask(__name__)
+
+app.config["SECRET_KEY"] = os.environ["FLASK_SECRET_KEY"]
+
+app.config["SESSION_COOKIE_HTTPONLY"] = True
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+app.config["SESSION_COOKIE_SECURE"] = (
+    os.getenv("APP_ENV") == "production"
+)
 
 # Database configuration
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///deadlineradar.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+# Production request limits
+app.config["MAX_CONTENT_LENGTH"] = 6 * 1024 * 1024
+
+limiter = Limiter(
+    key_func=get_remote_address,
+    app=app,
+    default_limits=["300 per hour"],
+    storage_uri="memory://"
+)
 
 # Connect database with Flask
 db.init_app(app)
@@ -29,11 +54,22 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
+@app.before_request
+def initialize_workspace():
+    if "workspace_id" not in session:
+        session["workspace_id"] = uuid4().hex
+
+
+def workspace_tasks():
+    return Task.query.filter_by(
+        workspace_id=session["workspace_id"]
+    )
+
 def analyze_extracted_tasks(result):
 
     existing_tasks = [
         task.to_dict()
-        for task in Task.query.all()
+        for task in workspace_tasks().all()
     ]
 
     extracted_tasks = result.model_dump(
@@ -63,10 +99,11 @@ def health():
     return jsonify({
         "status": "healthy",
         "database": "connected",
-        "total_tasks": Task.query.count()
+        "total_tasks": workspace_tasks().count()
     })
 
 @app.route("/api/extract/text", methods=["POST"])
+@limiter.limit("10 per minute; 40 per hour")
 def extract_text():
 
     data = request.get_json(silent=True) or {}
@@ -94,6 +131,7 @@ def extract_text():
         }), 502
 
 @app.route("/api/extract/image", methods=["POST"])
+@limiter.limit("5 per minute; 20 per hour")
 def extract_image():
 
     if "image" not in request.files:
@@ -148,7 +186,7 @@ def extract_image():
 @app.route("/api/tasks", methods=["GET"])
 def get_tasks():
 
-    tasks = Task.query.order_by(
+    tasks = workspace_tasks().order_by(
         Task.due_date.asc().nulls_last()
     ).all()
 
@@ -191,6 +229,7 @@ def save_tasks():
 
             new_task = Task(
                 **item.model_dump(),
+                workspace_id=session["workspace_id"],
                 source_type=source_type,
                 status="pending",
                 completed_hours=0.0
@@ -222,7 +261,9 @@ def save_tasks():
 @app.route("/api/tasks/<int:task_id>", methods=["PATCH"])
 def update_task(task_id):
 
-    task = db.session.get(Task, task_id)
+    task = workspace_tasks().filter_by(
+        id=task_id
+    ).first()
 
     if task is None:
         return jsonify({
@@ -283,7 +324,9 @@ def update_task(task_id):
 @app.route("/api/tasks/<int:task_id>", methods=["DELETE"])
 def delete_task(task_id):
 
-    task = db.session.get(Task, task_id)
+    task = workspace_tasks().filter_by(
+        id=task_id
+    ).first()
 
     if task is None:
         return jsonify({
@@ -332,7 +375,7 @@ def get_collisions():
 
     tasks = [
         task.to_dict()
-        for task in Task.query.all()
+        for task in workspace_tasks().all()
     ]
 
     result = analyze_collisions(
@@ -371,7 +414,7 @@ def get_schedule():
 
     tasks = [
         task.to_dict()
-        for task in Task.query.all()
+        for task in workspace_tasks().all()
     ]
 
     result = generate_schedule(
@@ -436,7 +479,7 @@ def run_simulation():
 
         tasks = [
             task.to_dict()
-            for task in Task.query.all()
+            for task in workspace_tasks().all()
         ]
 
         result = simulate_scenario(
@@ -460,6 +503,7 @@ def run_simulation():
         }), 400
 
 @app.route("/api/extension", methods=["POST"])
+@limiter.limit("10 per minute; 40 per hour")
 def get_extension():
 
     data = request.get_json(silent=True)
@@ -497,7 +541,7 @@ def get_extension():
 
         tasks = [
             task.to_dict()
-            for task in Task.query.all()
+            for task in workspace_tasks().all()
         ]
 
         recommendation = recommend_extension(
@@ -546,5 +590,20 @@ def get_extension():
         "email_sent": False
     })
 
+@app.errorhandler(429)
+def rate_limit_exceeded(error):
+    return jsonify({
+        "success": False,
+        "error": "Too many requests. Please try again later."
+    }), 429
+
+
+@app.errorhandler(413)
+def request_too_large(error):
+    return jsonify({
+        "success": False,
+        "error": "The uploaded file or request is too large."
+    }), 413
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)

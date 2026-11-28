@@ -9,6 +9,11 @@ class Task(db.Model):
     __tablename__ = "tasks"
 
     id = db.Column(db.Integer, primary_key=True)
+    workspace_id = db.Column(
+        db.String(64),
+        nullable=False,
+        index=True
+    )
 
     subject = db.Column(db.String(100), nullable=False)
     task = db.Column(db.String(200), nullable=False)
